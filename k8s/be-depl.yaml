@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-be
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: chat-be
+  template:
+    metadata:
+      labels:
+        app: chat-be
+    spec:
+      containers:
+      - name: chat-be
+        image: be:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3001
+        imagePullPolicy: Never
+        env:
+          - name: REFRESH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: env-var
+                key: REFRESH_TOKEN
+          - name: CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: env-var
+                key: CLIENT_ID
+          - name: CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: env-var
+                key: CLEINT_SECRET
+          - name: REDIRECT_URI  
+            valueFrom:
+              secretKeyRef:
+                name: env-var
+                key: REDIRECT_URI
+          - name: CORS_ORIGIN
+            valueFrom:
+              secretKeyRef:
+                name: env-var
+                key: CORS_ORIGIN
+     

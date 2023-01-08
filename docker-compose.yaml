@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  fe:
+    container_name: app-fe
+    image: fe
+    build:
+      context: ./frontend
+      target: development
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - 3000:3000
+    environment:
+      REACT_APP_RAPID_API_KEY: ${REACT_APP_RAPID_API_KEY}
+      ESLINT_NO_DEV_ERRORS: ${ESLINT_NO_DEV_ERRORS}
+      REACT_APP_baseURL: ${REACT_APP_baseURL}
+      REACT_APP_HOST_SERVER: ${REACT_APP_HOST_SERVER}
+      REACT_APP_RapidAPI_HOST_YT: ${REACT_APP_RapidAPI_HOST_YT}
+      REACT_APP_RapidAPI_KEY_YT: ${REACT_APP_RapidAPI_KEY_YT}
+    depends_on: 
+      - be
+  be:
+    container_name: app-be
+    image: be
+    build:
+      context: ./backend
+      target: backend
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend/src:/app/src
+    environment:
+      REFRESH_TOKEN: ${REFRESH_TOKEN}
+      CLIENT_ID: ${CLIENT_ID}
+      CLEINT_SECRET: ${CLEINT_SECRET}
+      REDIRECT_URI: ${REDIRECT_URI}
+      CORS_ORIGIN: ${CORS_ORIGIN}
