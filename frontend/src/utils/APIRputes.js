@@ -1,4 +1,4 @@
-  export  const host = process.env.REACT_APP_HOST_SERVER;
+  export  const host = process.env.REACT_APP_HOST_SERVERz;
   export const registerRoute = `${host}/api/user/signup`;
   export const loginRoute = `${host}/api/user/login`;
   export const setAvatarRoute = `${host}/api/user/setAvatar`;

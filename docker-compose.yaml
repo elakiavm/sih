@@ -18,6 +18,7 @@ services:
       REACT_APP_HOST_SERVER: ${REACT_APP_HOST_SERVER}
       REACT_APP_RapidAPI_HOST_YT: ${REACT_APP_RapidAPI_HOST_YT}
       REACT_APP_RapidAPI_KEY_YT: ${REACT_APP_RapidAPI_KEY_YT}
+      HOST: "localhost"
     depends_on: 
       - be
   be:

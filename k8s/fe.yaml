@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-depl
+spec:
+  selector:
+    matchLabels:
+      app: fe
+  template:
+    metadata:
+      labels:
+        app: fe
+    spec:
+      containers:
+      - name: fe
+        image: front
+        imagePullPolicy: IfNotPresent
+        # env:
+        #   - name: REACT_APP_RAPID_API_KEY
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: env-var
+        #         key: REACT_APP_RAPID_API_KEY
+        #   - name: ESLINT_NO_DEV_ERRORS
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: env-var
+        #         key: ESLINT_NO_DEV_ERRORS
+        #   - name: REACT_APP_baseURL
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: env-var
+        #         key: REACT_APP_baseURL
+        #   - name: REACT_APP_HOST_SERVER
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: env-var
+        #         key: REACT_APP_HOST_SERVER
+        #   - name: REACT_APP_RapidAPI_HOST_YT
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: env-var
+        #         key: REACT_APP_RapidAPI_HOST_YT
+        #   - name: REACT_APP_RapidAPI_KEY_YT
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: env-var
+        #         key: REACT_APP_RapidAPI_KEY_YT
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+---
+# Path: service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-svc
+spec:
+  selector:
+    app: fe
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  

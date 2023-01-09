@@ -11,5 +11,6 @@ COPY . .
 # Expose port
 EXPOSE 3000
 ENV CI=true
+ENV HOST="localhost"
 # Start the app
 CMD [ "yarn", "start" ]

@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import 'jquery/dist/jquery.js';
 
-axios.defaults.baseURL = process.env.REACT_APP_baseURL;
+axios.defaults.baseURL = process.env.REACT_APP_baseURLzz;
     let userData =  JSON.parse(localStorage.getItem("userData"))
     let token
     if(userData){
